@@ -22,11 +22,11 @@ spec:
     spec:
       containers:
       - name: my-app
-        image: kfengbest/mst-js:latest
+        image: kfengbest/mst-js-recast:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
         - name: VERSION
-          value: v8.0.0
+          value: v2.0.0
 

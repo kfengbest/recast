@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: recast
-        image: nanook/sample-app:1.0.0
+        image: kfengbest/mst-js-recast:latest
         ports:
           - name: http
             containerPort: 8080

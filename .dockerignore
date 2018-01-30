@@ -1,0 +1,17 @@
+.DS_Store
+
+
+node_modules/
+.git/
+coverage/
+
+.dockerignore
+Dockerfile
+
+.gitignore
+.env
+.eslintrc
+.editorconfig
+.gitlab-ci.yml
+
+compiled/

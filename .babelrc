@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "react"
+  ],
+  "env": {
+    "test": {
+      "sourceMaps": "inline",
+      "retainLines": true,
+      "presets": [
+        "es2015",
+        "react"
+      ]
+    }
+  }
+}

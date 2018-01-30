@@ -1,28 +1,32 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
-metadata: 
-  name: recast-deployment
+metadata:
+  name: my-app
+  labels:
+    app: my-app
 spec:
   replicas: 3
-  selector:
-    matchLabels:
-      app: recast
-      stage: prod
-  revisionHistoryLimit: 5
   strategy:
-    rollingUpdate: 
+    type: RollingUpdate
+    rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
-    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: my-app
   template:
     metadata:
       labels:
-        app: recast
-        stage: prod
+        app: my-app
+        version: v1.0.0
     spec:
       containers:
-      - name: recast
-        image: kfengbest/mst-js-recast:latest
+      - name: my-app
+        image: kfengbest/mst-js:latest
+        imagePullPolicy: Always
         ports:
-          - name: http
-            containerPort: 8080
+        - containerPort: 8080
+        env:
+        - name: VERSION
+          value: v8.0.0
+

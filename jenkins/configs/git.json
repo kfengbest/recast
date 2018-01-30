@@ -1,4 +1,4 @@
 {
-    "repo" : "https://github.com/kfengbest/microservice-template-js.git",
+    "repo" : "https://github.com/kfengbest/recast.git",
     "branch" : ["master", "staging", "prd"]
 }

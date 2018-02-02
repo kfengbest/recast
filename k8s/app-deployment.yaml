@@ -3,7 +3,7 @@ kind: Deployment
 metadata: 
   name: recast-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: recast
@@ -26,3 +26,8 @@ spec:
         ports:
           - name: http
             containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "300m"

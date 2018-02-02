@@ -1,0 +1,4 @@
+{
+    "repo" : "https://github.com/kfengbest/recast.git",
+    "branch" : ["master", "staging", "prd"]
+}

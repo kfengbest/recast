@@ -2,16 +2,20 @@ var finalhandler = require('finalhandler');
 var http = require('http');
 var serveStatic = require('serve-static');
 var accesslog = require('access-log');
+var geoip = require('geoip-lite');
 
 var format = {
     "ip": ":ip",
+    "Xip": ":Xip",
     "method": ":method",
     "statusCode": ":statusCode",
     "url": ":url",
-    "referer": ":userAgent"
+    "referer": ":userAgent",
+    "startTime": ":startTime",
+    "endTime": ":endTime",
+    "delta": ":{delta}",
 };
 
-// var format = '{"ip":":ip", "method":":method", "statusCode":":statusCode", "url":":url", "referer":":userAgent"}';
 format = JSON.stringify(format);
 
 
@@ -21,7 +25,13 @@ var serve = serveStatic('.', {'index': ['index.html', 'index.htm']});
 // Create server
 var server = http.createServer(function onRequest (req, res) {
   accesslog(req, res, format, function(s) {
-    console.log(s);
+    var result = JSON.parse(s);
+    var geo = geoip.lookup(result.Xip);
+    if (geo && geo.ll) {
+      result['latlon'] = geo.ll;
+    }
+
+    console.log(JSON.stringify(result));
   });
   serve(req, res, finalhandler(req, res))
 });

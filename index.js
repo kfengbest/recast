@@ -27,7 +27,7 @@ var server = http.createServer(function onRequest (req, res) {
     var result = JSON.parse(s);
     var geo = geoip.lookup(result.Xip);
     if (geo && geo.ll) {
-      result['loc'] = [geo.ll[1], geo.ll[0]];
+      result['recast']['loc'] = [geo.ll[1], geo.ll[0]];
     }
 
     console.log(JSON.stringify(result));

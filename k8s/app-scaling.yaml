@@ -7,5 +7,5 @@ spec:
     kind: Deployment
     name: recast-deployment
   minReplicas: 1
-  maxReplicas: 100
+  maxReplicas: 16
   targetCPUUtilizationPercentage: 10

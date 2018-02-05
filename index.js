@@ -5,15 +5,14 @@ var accesslog = require('access-log');
 var geoip = require('geoip-lite');
 
 var format = {
-    "ip": ":ip",
-    "Xip": ":Xip",
-    "method": ":method",
-    "statusCode": ":statusCode",
-    "url": ":url",
-    "referer": ":userAgent",
-    "startTime": ":startTime",
-    "endTime": ":endTime",
-    "delta": ":{delta}",
+    "recast": {
+      "ip": ":ip",
+      "method": ":method",
+      "status": ":statusCode",
+      "url": ":url",
+      "referer": ":userAgent",
+      "time": ":{delta}"
+    }
 };
 
 format = JSON.stringify(format);
@@ -28,7 +27,7 @@ var server = http.createServer(function onRequest (req, res) {
     var result = JSON.parse(s);
     var geo = geoip.lookup(result.Xip);
     if (geo && geo.ll) {
-      result['latlon'] = geo.ll;
+      result['recast']['loc'] = [geo.ll[1], geo.ll[0]];
     }
 
     console.log(JSON.stringify(result));

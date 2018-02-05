@@ -47,11 +47,7 @@ spec:
     spec:
       containers:
       - name: recast
-        image: kfengbest/mst-js-recast
-        imagePullPolicy: Always
+        image: nanook/sample-app:1.0.0
         ports:
           - name: http
             containerPort: 8080
-        env:
-        - name: VERSION
-          value: v1.0.0

@@ -11,4 +11,4 @@ compiled/
 #src/config/youtube.js
 #compiled/config/youtube.js
 
-.credentials/*
+jenkins/.credentials/*

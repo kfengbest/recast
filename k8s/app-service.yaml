@@ -10,5 +10,4 @@ spec:
     - port: 80
       targetPort: http
   type: LoadBalancer
-  externalTrafficPolicy: Local
 

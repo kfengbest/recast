@@ -29,7 +29,7 @@ spec:
             containerPort: 8080
         env:
         - name: VERSION
-          value: v1.0.4
+          value: RECAST_VERSION
         resources:
           requests:
             cpu: "100m"

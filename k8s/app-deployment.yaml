@@ -30,5 +30,10 @@ spec:
         env:
         - name: VERSION
           value: v1.0.4
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "300m"  
 
             

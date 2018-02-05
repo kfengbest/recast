@@ -29,6 +29,6 @@ spec:
             containerPort: 8080
         env:
         - name: VERSION
-          value: v1.0.2
+          value: v1.0.3
 
             

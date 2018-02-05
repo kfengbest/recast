@@ -40,6 +40,7 @@ pipeline {
         stage('update version'){
             steps {
                 sh "sed -i -e 's/RECAST_VERSION/${BUILD_NUMBER}/g' k8s/app-deployment.yaml"
+                sh "cat k8s/app-deployment.yaml"
             }
         }  
         stage('K8s Deploy') {

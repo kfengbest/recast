@@ -14,37 +14,27 @@ pipeline {
         }
         stage('Packaging'){
             steps {
-                sh "git archive -v -o artifect.zip --format=zip HEAD"
+                echo 'Packaging..'
             }
         }
         stage('Upload to S3') {
             steps {
-                withAWS(region:"us-east-1",credentials:"global_usnp_aws_r") {
-                    s3Upload(file:"artifect.zip", bucket:"cp-docker2-stg-s3-eb",path:"artifect.zip")
-                }
+                echo 'Upload..'
             }
         }        
         stage('Docker Build') {
             steps {
-                sh "docker build -t kfengbest/mst-js-recast:latest ."
+                echo 'Docker Build..'
             }
         }
         stage('Docker Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                sh 'docker push kfengbest/mst-js-recast:latest'
-                }
+                echo 'Docker Push..'
             }
         }  
         stage('K8s Deploy') {
             steps {
-                kubernetesDeploy(
-                        credentialsType: 'KubeConfig',
-                        kubeConfig: [path: '/usr/share/jenkins/ref/init.groovy.d/kubeconfig'],
-                        configs: 'k8s/*.yaml',
-                        enableConfigSubstitution: false,
-                )
+                echo 'K8s Deploy..'
             }
         } 
 

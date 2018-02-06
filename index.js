@@ -25,9 +25,15 @@ var serve = serveStatic('.', {'index': ['index.html', 'index.htm']});
 var server = http.createServer(function onRequest (req, res) {
   accesslog(req, res, format, function(s) {
     var result = JSON.parse(s);
-    var geo = geoip.lookup(result.Xip);
-    if (geo && geo.ll) {
-      result['recast']['loc'] = [geo.ll[1], geo.ll[0]];
+    var realIp = req.headers['x-forwarded-for'];
+
+    result['recast']['mark'] = 'blue';
+    if (realIp) {
+      result['recast']['real-ip'] = realIp.split()[0];
+      var geo = geoip.lookup(result['recast']['real-ip']);
+      if (geo && geo.ll) {
+        result['recast']['loc'] = [geo.ll[1], geo.ll[0]];
+      }
     }
 
     console.log(JSON.stringify(result));
